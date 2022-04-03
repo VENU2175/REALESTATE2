@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Real Estate Management System</title>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<th:block th:include="/_header"></th:block>
+</head>
+<style>
+.box {
+width: 230px;
+height: 155px;
+margin-bottom: 5px;
+}
+
+
+
+</style>
+ <body>
+
+<th:block th:include="/_menu"></th:block>
+
+
+
+	<div class="container">
+		<h2 style="font-weight: bold; font-family: 'Permanent Marker', cursive; color:blue;">PROPERTY
+			LIST</h2>
+
+		<br>
+		<br>
+		<!-- nav start  -->
+		<div class="row">
+			<div class="col-lg-6 offset-4">
+				<div class="" th:if="${paginationProducts.totalPages > 1}">
+					<th:block th:each="page : ${paginationProducts.navigationPages}">
+
+						<a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
+							class="btn btn-dark" style="border-radius: 0%; margin: 2px;"
+							th:utext="${page}"></a>
+
+						<span class="btn btn-dark" style="border-radius: 0%; margin: 2px;"
+							th:if="${page == -1}"> ... </span>
+
+					</th:block>
+				</div>
+			</div>
+		</div>
+		<!-- nav end -->
+	</div>
+	<!-- container end -->
+	<div class="container">
+		<input class="form-control"  id="myInput" type="text"
+			placeholder="SEARCH.."> <br>
+
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr bgcolor="#00cccc">
+					<th>PROPERTY IMAGE</th>
+					<th>PROPERTY DESCRIPTION</th>
+					<th>PRICE</th>
+					<th>ACTION</th>
+				</tr>
+			</thead>
+			<div th:each="prodInfo : ${paginationProducts.list}">
+				<tbody id="myTable">
+					<tr>
+						<td>
+				<marquee> 
+			       <img th:src="${prodInfo.image}" width="800" height="300"> 
+				  <img th:src="${prodInfo.image1}" width="800" height="300"> 
+			      <img th:src="${prodInfo.image2}" width="800" height="300"> 
+			    </marquee> 
+							
+				</td>
+						<td>
+							<p style="font-size: 20px; font-weight: 500">
+								<span th:utext="${prodInfo.name}"></span><br>
+
+							</p>
+						</td>
+						<td><b
+							style="color: Black; font-size: 25px; font-weight: 500">Rs. <span
+								th:utext="${prodInfo.price}"></span></b></td>
+
+						<td><a th:href="@{|/buyProduct?code=${prodInfo.code}|}"
+							class="btn btn-link"><b>BUY PROPERTY</b></a> <th:block
+								sec:authorize="hasAuthority('ROLE_MANAGER')">
+
+								<a style="color: red; font-weight: bold"
+									th:href="@{|/admin/product?code=${prodInfo.code}|}"><b>EDIT
+										PROPERTY</b></a>
+
+							</th:block></td>
+					</tr>
+
+				</tbody>
+			</div>
+		</table>
+
+
+	</div>
+	
+
+
+	<!-- ------------------------------Offer end---------------------------------- -->
+
+
+
+	<th:block th:include="/_footer"></th:block>
+	<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+</body>
+</html>

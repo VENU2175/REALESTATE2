@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Real Estate Management System</title>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+<th:block th:include="/_header"></th:block>
+</head>
+<body style="background-image:url('https://img.staticmb.com/mbcontent//images/uploads/2018/12/certificate.png'); 
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+ background-size: cover;">
+
+	<th:block th:include="/_menu"></th:block>
+	<div class="tm-row">
+		<div class="tm-col-left"></div>
+		<main class="tm-col-right">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 offset-3">
+
+						<div class="bd-example">
+							<h3 style="font-weight: bold; font-family: 'Courgette', cursive; color: aqua;">BUYER INFORMATION</h3>
+							<form method="POST" th:object="${customerForm}"
+								th:action="@{/shoppingCartCustomer}">
+								<div class="form-group">
+									<label for="exampleInputEmail1"><b style="font-weight: bold; color:black;">BUYER NAME</b></label> 
+									<input
+						type="text"  class="form-control" id="exampleInputEmail1" style="font-weight: bold; color:blue;"
+										th:field="*{name}"> 
+										<span class="error-message"
+										th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
+								</div>
+
+								<div class="form-group">
+									<label for="exampleInputEmail1"><b style="font-weight: bold; color:rgb(0, 0, 0);">EMAIL ID</b></label>
+									 <input
+										type="email" class="form-control" id="exampleInputEmail1" style="font-weight: bold; color:blue;"
+										th:field="*{email}"> <span class="error-message"
+										th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
+								</div>
+
+								<div class="form-group">
+									<label for="exampleInputEmail1"><b style="font-weight: bold; color:black;">PHONE NUMBER</b></label>
+									 <input
+										type="text" class="form-control" id="exampleInputEmail1" style="font-weight: bold; color:blue;"
+										th:field="*{phone}"> <span class="error-message"
+										th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
+								</div>
+
+								<div class="form-group">
+									<label for="exampleInputPassword1"><b style="font-weight: bold; color:black;">LOCATION</b></label>
+									
+									<textarea th:field="*{address}" class="form-control" style="font-weight: bold; color:blue;"></textarea>
+									<span class="error-message"
+										th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
+
+								</div>
+
+								<input type="submit" value="SUBMIT" class="btn btn-primary" style="background-color:lightgreen; border-color:white" /> 
+								<input type="reset" class="btn btn-outline-primary" value="RESET" style="background-color:lightblue; border-color:white"/>
+							</form>
+						</div>
+		</main>
+	</div>
+
+	</div>
+	</div>
+	</div>
+	</div>
+
+	<!-- ------------------------------container end---------------------------------- -->
+
+
+	<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Real Estate Management System</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+      <th:block th:include="/_header"></th:block>
+   </head>
+  <body style="background-image:url('https://valmark.in/blog/wp-content/uploads/2018/02/16-1.jpg'); 
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+ background-size: cover;">
+      
+      
+      
+      
+      <th:block th:include="/_menu"></th:block>
+       <div class="tm-row">
+                <div class="tm-col-left"></div>
+                <main class="tm-col-right">
+      <div style="color:green;" class="page-title"></div>
+      <div class="customer-info-container">
+         <h1 style="color:aqua; font-family: 'Pacifico', cursive; font-weight: bold; font-size:40px">BUYER INFORMATION:</h1>
+         <ul >
+            <li style="color:black; font-weight: bold; font-size:25px">Name: <span th:utext="${myCart.customerInfo.name}" style="color:black; font-weight: bold; font-size:25px" ></span></li>
+            <li style="color:black; font-weight: bold; font-size:25px">Email: <span th:utext="${myCart.customerInfo.email}" style="color:black; font-weight: bold; font-size:25px"></span></li>
+            <li style="color:black; font-weight: bold; font-size:25px">Phone: <span th:utext="${myCart.customerInfo.phone}" style="color:black; font-weight: bold; font-size:25px"></span></li>
+            <li style="color:black; font-weight: bold; font-size:25px">Location: <span th:utext="${myCart.customerInfo.address}" style="color:black; font-weight: bold; font-size:25px"></span></li>
+         </ul>
+         <h1 style="color:aqua; font-family: 'Pacifico', cursive; font-weight: bold; font-size:40px">PURCHASE SUMMARY:</h1>
+         <ul>
+            <li style="color:black; font-weight: bold; font-size:25px">Total:
+               <span class="total"
+                  th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA')}" style="color:black; font-weight: bold; font-size:25px" >  
+               </span>
+            </li>
+         </ul>
+      </div>
+      <form method="POST" th:action="@{/shoppingCartConfirmation}">
+         <!-- Edit Cart -->
+        
+         <!-- Send/Save -->
+         <input type="submit" value="CONFIRM PURCHASE" class="button-send-sc" style="background-color:lightgreen; border-color:white" />
+      </form>
+      </main>
+      </div>
+       
+      <th:block th:include="/_footer"></th:block>
+       
+   </body>
+</html>

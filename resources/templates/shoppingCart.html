@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Real Estate Management System</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+      <th:block th:include="/_header"></th:block>
+   </head>
+   <style>
+	   
+   </style>
+    <body style="background-image:url('https://media.istockphoto.com/photos/close-up-young-man-hand-press-on-calculator-to-check-and-summary-of-picture-id1187653232?k=20&m=1187653232&s=612x612&w=0&h=B9nlmSuPyG0DnBFfHjJS0innXpcwE_ZYffCCjqhi720='); 
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+ background-size: cover;">
+      
+      <th:block th:include="/_menu"></th:block>
+       
+            
+      <th:block th:if="${cartForm == null || cartForm.cartLines == null || cartForm.cartLines.empty}">
+         <h2>There is no items in Cart</h2>
+         <a th:href="@{/productList}">Show Property List</a>
+      </th:block>
+      
+      <div class="container cart_bag">
+       <h2 style="font-weight: bold; font-family: 'Courgette', cursive; color: aqua;">YOUR CART</h2>
+      <div class="row">
+        <div class="col-lg-8 col-sm-8 col-xs-12">
+          <table class="table">
+          
+          <th:block th:if="${cartForm != null && cartForm.cartLines != null && !cartForm.cartLines.empty}">
+         <form method="POST" th:object="${cartForm}" th:action="@{/shoppingCart}">
+          
+               <div class="product-preview-container"
+                        th:each="cartLineInfo, varStatus : ${cartForm.cartLines}">
+            <tr>
+              <td></td>
+              <td>
+                <b style="color: #000;font-size:20px; font-weight: 600" th:utext="${cartLineInfo.productInfo.name}"></b>
+                <p style="font-size: 14px"><br>
+                <b style="font-weight: bold; color: Blue ; font-size:25px;">PRICE:</b> <span th:utext="${cartLineInfo.productInfo.price}"></span>
+                </p>
+                
+                
+                        <input type="hidden"      
+                           th:name="|cartLines[${varStatus.index}].productInfo.code|"                       
+                           th:value="${cartLineInfo.productInfo.code}" />
+                 
+                 </td>
+              <td> <input type="text" th:name="|cartLines[${varStatus.index}].quantity|" th:value="${cartLineInfo.quantity}" class="form-control" style="width: 50px; height: 35px;">
+              
+              </td>
+              <td><b style="color:red;font-size:25px; font-weight: 500">Rs.<span th:utext="${cartLineInfo.amount}"></span></b></td>
+            </tr>
+              </div>
+
+            
+            
+            
+         </form>
+      </th:block>
+          </table>
+        </div> <!-- -----col-lg-8 col-sm-8 col-xs-12 end --- -->
+        <div class="col-lg-4 col-sm-4 col-xs-12">
+          <h5 style="font-weight: bold;"><b>SUMMARY</b></h5>
+          <table class="table cart-subtotal">
+            <tr>
+              <td>
+                <b style="color: white;font-size:30px; font-family: 'Courgette', cursive; font-weight: 600">SUBTOTAL</b> <i class="fas fa-question-circle"></i><br><br>
+                
+              </td>
+              <td>
+              <br><br>
+              <b style="color:red;font-size:25px; font-weight: 500">Rs.<span th:utext="${myCart.amountTotal}"></span></b><br><br>
+            </td> 
+         
+            <tr>
+              <td><b style="color: white;font-size:30px; font-family: 'Courgette', cursive; font-weight: 600">TOTAL</b></td>
+              <td><b style="color:red;font-size:30px; font-weight: 700">Rs. <span th:utext="${myCart.amountTotal}"></span></b></td> 
+            </tr>
+
+
+
+            
+          </table>
+          
+          <a th:href="@{/shoppingCartCustomer}" class="btn btn-dark btn-lg btn-block">CHECKOUT <span class="fa fa-arrow-right" style="margin-left: 9px;"></span></a>
+          
+          
+          <br><br>
+          
+          
+        </div>
+      </div>
+    </div>
+   
+
+        <!-- ------------------------------footer end---------------------------------- -->
+       
+      
+       
+      <th:block th:include="/_footer"></th:block>
+       
+   </body>
+</html>

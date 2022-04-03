@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Real Estate Management System</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <th:block th:include="/_header"></th:block>
+   </head>
+   <style>
+   	.box {
+    width: 230px;
+    height: 155px;
+    margin-bottom: 5px;
+	}
+	
+   </style>
+   <body>
+      
+      <th:block th:include="/_menu"></th:block>
+      
+      
+  
+    <div class="container">
+        <h2 style="font-weight: bold; color:blue">SELLERS LIST</h2>
+        
+        <br><br>
+  <!-- nav start  -->
+  		<div class="row">
+  		<div class="col-lg-6 offset-4">
+        <div class="" th:if="${paginationSellers.totalPages > 1}">
+         <th:block th:each="page : ${paginationSellers.navigationPages}">
+         
+            <a th:href="@{|/sellerList?page=${page}|}" th:if="${page != -1}"
+               class="btn btn-dark" style="border-radius: 0%; margin:2px;" th:utext="${page}"></a>
+               
+            <span class="btn btn-dark" style="border-radius: 0%; margin:2px;" th:if="${page == -1}"> ... </span>
+             
+         </th:block>
+         </div>
+         </div>
+      </div> <!-- nav end -->
+    </div><!-- container end -->
+  <div class="container">
+   <input class="form-control" id="myInput" type="text" placeholder="SEARCH..">
+  <br>
+   
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr bgcolor="#00cccc">
+        <th style="font-weight: bold; font-size:25px; color:black; text-align: center;">USER NAME</th>
+        
+        <th style="font-weight: bold; font-size:25px; color:black; text-align: center;">ROLE</th>
+        
+      </tr>
+    </thead>
+    <div th:each="prodInfo : ${paginationSellers.list}">
+    <tbody id="myTable">
+      <tr>
+        <td>
+        <p style="font-size:20px;"><span th:utext="${prodInfo.code}" style="font-weight: bold; color:black; text-align: center"></span>
+     </td>
+        <td> <p style="font-size:20px;"><span th:utext="${prodInfo.price}" style="font-weight: bold; color:black; text-align: center"></span><br>
+        
+      </p></td>
+      </tr>
+
+    </tbody>
+  </div>
+  </table>
+
+ 
+</div>
+
+
+<!-- ------------------------------Offer end---------------------------------- -->
+      
+      
+       
+      <th:block th:include="/_footer"></th:block>
+    <script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>   
+   </body>
+</html>

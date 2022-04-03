@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Real Estate Management System</title>
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+<th:block th:include="/_header"></th:block>
+
+
+
+</head>
+
+<body
+	style="background-image: url('https://as2.ftcdn.net/v2/jpg/03/00/10/35/1000_F_300103505_oBLUa4dEG8mFdP60givbyNdoy7aHFmuu.jpg'); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+
+
+	<th:block th:include="/_menu"></th:block>
+	<div class="tm-row">
+		<div class="tm-col-left"></div>
+		<main class="tm-col-right">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-sm-8 col-xs-12">
+						<section id="spring_col1">
+							<h1 style="color: aqua; font-family: 'Carter One', cursive">LOG
+								IN</h1>
+
+
+
+							<!-- /login?error=true -->
+							<th:block
+								th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+								<div th:if="${#request.getParameter('error') == 'true'}"
+									style="color: red; margin: 10px 0px;">
+									Login Failed!!!<br /> Reason : <span
+										th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
+								</div>
+							</th:block>
+
+							<form method="POST" th:action="@{/j_spring_security_check}">
+								<div class="form-group">
+									<label for="exampleInputEmail1" style="color: black; font-weight: bold"><b>USER
+											NAME</b></label> <input type="text" name="userName" class="form-control"
+										id="exampleInputEmail1" aria-describedby="emailHelp">
+
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1" style="color: black; font-weight: bold"><b>PASSWORD</b></label>
+									<input type="password" name="password" class="form-control"
+										id="exampleInputPassword1">
+								</div>
+
+								<button type="submit" class="spring-btn-black"
+									style="background-color: white; font-weight: bold; border-color: green;">
+									LOG IN <span class="fa fa-arrow-right"
+										style="margin-left: 25px;"></span>
+								</button>
+
+							</form>
+
+							<span class="error-message" th:utext="${error}"></span>
+
+
+							<!--  ----------- form end -------------- -->
+
+
+						</section>
+
+					</div>
+
+
+				</div>
+			</div>
+		</main>
+	</div>
+
+
+	<!-- ------------------------------Login page end---------------------------------- -->
+
+
+
+
+	<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>

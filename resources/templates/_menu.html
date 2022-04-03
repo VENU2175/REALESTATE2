@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Real Estate Management System</title>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"
+	rel="stylesheet" />
+<!-- https://fonts.google.com/ -->
+<link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+<!-- https://getbootstrap.com/ -->
+<link th:href="@{fontawesome/css/all.min.css}" rel="stylesheet" />
+<!-- https://fontawesome.com/ -->
+<link th:href="@{/css/templatemo-diagoona.css}" rel="stylesheet" />
+<!--
+
+TemplateMo 550 Diagoona
+
+https://templatemo.com/tm-550-diagoona
+
+-->
+
+   <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
+</head>
+
+<body>
+	<div class="tm-container">
+		<div>
+			<div class="tm-row pt-4">
+				<div class="tm-col-left">
+					<div class="tm-site-header media">
+						<i class="fas fa-home fa-3x mt-1 tm-logo"></i>
+
+
+
+						<div class="media-body">
+							<!--  <h1 class="tm-sitename text-uppercase">REAL ESTATE MANAGEMENT</h1>-->
+							<h2 class="animate__animated animate__bounce animate_slower animate_repeat-5" style= "font-family: 'Anton', sans-serif">REAL ESTATE
+								MANAGEMENT</h2>
+							<!--  <p class="tm-slogon">Management</p>-->
+
+							<th:block sec:authorize="isAuthenticated()">
+
+								<ul class="navbar-nav text-lowercase">
+									<li class="nav-item ">
+										<!-- <a class="nav-link" th:href="@{/admin/logout}">Logout</a> -->
+									</li>
+								</ul>
+							</th:block>
+						</div>
+					</div>
+				</div>
+
+				<div class="tm-col-right">
+					<nav class="navbar navbar-expand-lg" id="tm-main-nav">
+
+						<div class="collapse navbar-collapse tm-nav" id="navbar-nav">
+							<ul class="navbar-nav text-uppercase">
+
+								<li class="nav-item active"><a class="nav-link"
+									style="color:black; font-weight: bold" th:href="@{/}"><b>Home</b><span
+										class="sr-only">(current)</span></a></li>
+
+								<li class="nav-item"><a class="nav-link"
+									style="color:black; font-weight: bold"
+									th:href="@{/productList}"><b>Property List</b></a></li>
+
+
+								<li class="nav-item">
+								<a th:href="@{/seller}"
+									class="nav-link" style="color:black; font-weight: bold"><b> SELLER REGISTER</b></a></li>
+
+
+								<th:block
+									sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+									<li class="nav-item"><a th:href="@{/admin/orderList}"
+										class="nav-link" style="color:black; font-weight: bold"><b>BUYER
+												LIST</b> </a></li>
+								</th:block>
+								<th:block sec:authorize="hasRole('ROLE_EMPLOYEE')">
+									<li class="nav-item"><a th:href="@{/sellerList}"
+										class="nav-link" style="color: black; font-weight: bold"><b>SELLER
+												LIST</b></a></li>
+
+								</th:block>
+								
+								<th:block sec:authorize="hasRole('ROLE_MANAGER')">
+									<li class="nav-item"><a th:href="@{/admin/product}"
+										class="nav-link" style="color:black; font-weight: bold"><b>CREATE
+												PROPERTY</b></a></li>
+								</th:block>
+
+
+								<th:block sec:authorize="isAuthenticated()">
+									<li class="nav-item"><a class="nav-link"
+										th:href="@{/admin/logout}"
+										style="color:black; font-weight: bold"><b>LOGOUT</b></a></li>
+								</th:block>
+
+								<th:block sec:authorize="!isAuthenticated()">
+									<li class="nav-item"><a th:href="@{/admin/login}"
+										class="nav-link" style="color: black; font-weight: bold"><b>LOGIN</b></a></li>
+								</th:block>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+
+
+		</div>
+
+		<div class="tm-row">
+			<div class="tm-col-left text-center">
+				<ul class="tm-bg-controls-wrapper">
+					<li class="tm-bg-control active" data-id="0"></li>
+					<li class="tm-bg-control" data-id="1"></li>
+					<li class="tm-bg-control" data-id="2"></li>
+				</ul>
+			</div>
+
+		</div>
+
+		<!-- Diagonal background design -->
+		<div class="tm-bg">
+			<div class="tm-bg-left"></div>
+			<div class="tm-bg-right"></div>
+		</div>
+
+
+		<script th:src="@{js/jquery-3.4.1.min.js}"></script>
+		<script th:src="@{js/bootstrap.min.js}"></script>
+		<script th:src="@{js/jquery.backstretch.min.js}"></script>
+		<script th:src="@{js/templatemo-script.js}"></script>

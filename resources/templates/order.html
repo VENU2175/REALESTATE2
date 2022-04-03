@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Real Estate Management System</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+      <th:block th:include="/_header"></th:block>
+   </head>
+     <style>
+   	html, body{
+	height: 100%;
+	font-family: 'Lato', sans-serif;
+	font-family: 'Open Sans', sans-serif;
+	font-family: 'Abel', sans-serif;
+	background-image:url('https://valmark.in/blog/wp-content/uploads/2018/02/16-1.jpg');
+	  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+  ul li{
+  	list-style: none;
+  }
+   </style>
+   <body>
+      
+      <th:block th:include="/_menu"></th:block>
+      <div class="container">
+      	<div class="row">
+      		<div class="col-lg-8 ">
+       
+      
+       
+     
+   
+       </div>
+       <div class="col-lg-4">
+       <div class="customer-info-container">
+         <h3 style="font-weight: bold; font-family: 'Permanent Marker', cursive; font-weight: bold; font-size:20px; color:black">CUSTOMER INFORMATION:</h3>
+         <ul>
+            <li style="color:blue; font-weight: bold">NAME: <span th:utext="${orderInfo.customerName}" style="font-weight: bold"></span></li>
+            <li style="color:blue; font-weight: bold">EMAIL: <span th:utext="${orderInfo.customerEmail}" style="font-weight: bold"></span></li>
+            <li style="color:blue; font-weight: bold">PHONE: <span th:utext="${orderInfo.customerPhone}" style="font-weight: bold"></span></li>
+            <li style="color:blue; font-weight: bold">LOCATION: <span th:utext="${orderInfo.customerAddress}" style="font-weight: bold"></span></li>
+         </ul>
+         <h3 style="font-weight: bold; font-family: 'Permanent Marker', cursive; font-weight: bold; font-size:20px; color:black">ORDER SUMMARY:</h3>
+         <ul>
+            <li style="color:blue;font-weight: bold">TOTAL:
+               <span class="total" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}">         
+               </span>
+            </li>
+         </ul>
+      </div>
+       </div>
+      	</div>
+      </div> 
+      
+      <!-- ------------------------------container end---------------------------------- -->
+      
+      <div class="container">
+      	<div class="row">
+      		<div class="col-lg-12 ">
+      		   <table class="table table-bordered">
+         <tr bgcolor="LightBlue">
+            <th style="font-weight: bold">PROPERTY CODE</th>
+            <th style="font-weight: bold">PROPERTY DESCRIPTION</th>
+            <th style="font-weight: bold">QUANTITY</th>
+            <th style="font-weight: bold">PRICE</th>
+            <th style="font-weight: bold">AMOUNT</th>
+         </tr>
+         <tr style="color:black; font-weight: bold" th:each="orderDetailInfo : ${orderInfo.details}">
+            <td th:utext="${orderDetailInfo.productCode}"></td>
+            <td th:utext="${orderDetailInfo.productName}"></td>
+            <td th:utext="${orderDetailInfo.quanity}"></td>
+            <td th:utext="${#numbers.formatDecimal(orderDetailInfo.price,3,2,'COMMA')}"></td>
+            <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,3,2,'COMMA')}"></td>
+         </tr>
+      </table>
+      		 </div>
+      	</div>
+      </div> 
+      
+      <!-- ------------------------------container end---------------------------------- -->
+       
+      <th:block th:include="/_footer"></th:block>
+       
+   </body>
+</html>
